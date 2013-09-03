@@ -1,0 +1,68 @@
+#!/usr/bin/env sh
+# )A( - Andromeda
+#
+# startApp  wrapper
+#
+# (c) 2010-2013 Luca Cappelletti <luca.cappelletti@gmail.com>
+#
+# copyleft GNU/GPL all rights reserved
+#
+# do not forget now you have .cache/Volatile full private temp folder service
+# made by startApp
+
+options="$@"
+
+APP_NAME=FirefoxUX
+APP_RELEASE=26.0a1
+APP_KERNEL=Linux
+APP_OS=Debian7
+APP_PLATFORM=amd64
+
+APP_BIN=firefox
+
+APP_ROOT=io$APP_NAME$APP_RELEASE-$APP_OS
+SANDBOX_HOME=$APP_NAME
+
+export LD_LIBRARY_PATH=/home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/support:/home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/lib:$LD_LIBRARY_PATH
+export PATH=/home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/bin:$PATH
+
+
+if [ -f /home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/bin/$APP_BIN.gz ]
+then
+
+
+cd /home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/bin
+gunzip ./$APP_BIN.gz
+wait
+
+
+else
+
+:
+
+fi
+
+cd $HOME
+
+#### cache .mozilla in caso non è hard coded per esplicita volonta dell'utilizzatore
+#### implica che almeno una volta è stato fissata la cartella .mozilla
+#### e quindi la scelta viene rispettata
+#### diversamente .mozilla vive nella memoria volatile
+if [ -h $HOME/.mozilla ] && [ -e $HOME/.mozilla ]
+then
+:
+else
+
+        rm -rf $HOME/.mozilla
+        mkdir -p $HOME/.cache/Volatile/.mozilla
+        ln -s $HOME/.cache/Volatile/.mozilla $HOME/.mozilla
+
+fi
+
+cd $HOME
+
+# if you source . to provide this environment to firefox without forking...killing this script should kill firefox...if firefox does not fork!!
+
+dbus-launch --exit-with-session /home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/bin/$APP_BIN $options
+
+
