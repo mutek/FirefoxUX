@@ -22,6 +22,8 @@ Per spingere il deposito locale presso multipli depositi remoti (github e bitbuc
         fetch = +refs/heads/*:refs/remotes/origin/*
         url = https://github.com/UTENTE_1/NOME_DEPOSITO_1.git
         url = https://bitbucket.org/UTENTE_2/NOME_DEPOSITO_2.git
+        url = https://git.code.sf.net/p/NOME_DEPOSITO_3/code
+
         
 6) esegui i seguenti comandi:
 
@@ -30,6 +32,8 @@ git config --global user.email EMAIL_Z
 git add .
 git commit -a -m "COMMENTO"
 git push all master
+
+a questo punto in sequenza verra richiesto il login e la password di ogni account
 
 ---
 
