@@ -33,10 +33,22 @@ echo "Eseguo la finalizzazione dei cambiamenti in locale"
 git commit -a -m "$n"
 
 echo "Invio i cambiamenti locali ai depositi remoti..."
-echo "GitHub e Bitbucket"
+echo "GitHub e Bitbucket e Sourceforge"
 #git push origin master
-git push all master
-echo "ok"
+
+echo "-- GitHub --"
+git push GitHub master
+echo ""
+
+echo "-- Bitbucket --"
+git push Bitbucket master
+echo ""
+
+echo "-- Sourceforge --"
+git push Sourceforge master
+
+echo ""
+echo "done! :)"
 
 
 # official GitHub tips:
