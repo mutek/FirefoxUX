@@ -48,6 +48,13 @@ echo "-- Sourceforge --"
 git push Sourceforge master
 
 echo ""
+
+echo "-- Gitorius --"
+git push Gitorius master
+
+echo ""
+
+
 echo "done! :)"
 
 
