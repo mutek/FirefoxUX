@@ -1,0 +1,40 @@
+Per spingere il deposito locale presso multipli depositi remoti (github e bitbucket) seguire le seguenti istruzioni:
+
+1) Crea il repo su GitHub (esempio NOME_DEPOSITO_1) con account UTENTE_1
+
+2) Clona in locale
+
+3) Popola liberamente
+
+4) Crea il repo su BitBucket (esempio NOME_DEPOSITO_2) con account UTENTE_2
+
+5) Modifica il file .git/config in:
+
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[remote "all"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
+        url = https://github.com/UTENTE_1/NOME_DEPOSITO_1.git
+        url = https://bitbucket.org/UTENTE_2/NOME_DEPOSITO_2.git
+        
+6) esegui i seguenti comandi:
+
+git config --global user.name "UTENTE_X"
+git config --global user.email EMAIL_Z
+git add .
+git commit -a -m "COMMENTO"
+git push all master
+
+---
+
+questo aggiungera i cambiamenti al repo locale e spingere il repo locale verso i depositi remoti
+Il procedimento è testato e rocksolid
+Se si svolgono modifiche parziali è fondamentale mantenere i repo in sync e di volta in volta bisogna risolvere a seconda di che direzione si è intrapresi.
+
+Un metodo pratico è sempre quello di eseguire un pull di sincronizzazione prima di svolgere qualsiasi modifica
