@@ -32,8 +32,10 @@ read n
 echo "Eseguo la finalizzazione dei cambiamenti in locale"
 git commit -a -m "$n"
 
-echo "Invio i cambiamenti locali al deposito remoto..."
-git push origin master
+echo "Invio i cambiamenti locali ai depositi remoti..."
+echo "GitHub e Bitbucket"
+#git push origin master
+git push origin all
 echo "ok"
 
 
