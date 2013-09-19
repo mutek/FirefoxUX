@@ -1,4 +1,4 @@
-Per spingere il deposito locale presso multipli depositi remoti (github e bitbucket) seguire le seguenti istruzioni:
+Per spingere il deposito locale presso multipli depositi remoti (ad esempio github, bitbucket e sourceforge) seguire le seguenti istruzioni:
 
 1) Crea il repo su GitHub (esempio NOME_DEPOSITO_1) con account UTENTE_1
 
