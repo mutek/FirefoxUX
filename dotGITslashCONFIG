@@ -10,7 +10,18 @@
 	remote = origin
 	#remote = all
 	merge = refs/heads/master
-[remote "all"]
+[remote "GitHub"]
 	fetch = +refs/heads/*:refs/remotes/origin/*
 	url = https://github.com/mutek/FirefoxUX.git
+[remote "Bitbucket"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
 	url = https://bitbucket.org/infodomestic/firefoxux.git
+[remote "Sourceforge"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
+	url = ssh://mutek@git.code.sf.net/p/firefox-ux/code
+[remote "Gitorius"]
+	url = git@gitorious.org:firefoxux/firefoxux.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "GoogleCode"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
+	url = https://mutek.android@code.google.com/p/firefoxux/

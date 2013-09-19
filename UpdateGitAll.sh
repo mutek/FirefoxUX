@@ -36,29 +36,34 @@ echo "Invio i cambiamenti locali ai depositi remoti..."
 echo "GitHub e Bitbucket e Sourceforge"
 #git push origin master
 
+# GitHub
 echo "-- GitHub --"
 git push GitHub master
 echo ""
 
+# Bitbucket
 echo "-- Bitbucket --"
 git push Bitbucket master
 echo ""
 
+# Sourceforge
 echo "-- Sourceforge --"
 git push Sourceforge master
 
 echo ""
 
+# Gitorius
 git config --global user.name "mutek"
-git config --global user.email "mutek@riseup.net"
+git config --global user.email mutek@riseup.net
 echo "-- Gitorius --"
 git push Gitorius master
 
 echo ""
 
+# GoogleCode
 git config --global user.name "mutek.android"
-git config --global user.email "mutek.android@gmail.com"
-echo "-- Gitorius --"
+git config --global user.email mutek.android@gmail.com
+echo "-- GoogleCode --"
 echo "richiede la password momentanea generata in:"
 echo "https://code.google.com/hosting/settings"
 git push GoogleCode master
