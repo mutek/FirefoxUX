@@ -35,7 +35,7 @@ git commit -a -m "$n"
 echo "Invio i cambiamenti locali ai depositi remoti..."
 echo "GitHub e Bitbucket"
 #git push origin master
-git push origin all
+git push all
 echo "ok"
 
 
