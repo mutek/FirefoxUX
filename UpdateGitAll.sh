@@ -49,6 +49,8 @@ git push Sourceforge master
 
 echo ""
 
+git config --global user.name "mutek"
+git config --global user.email "mutek@riseup.net"
 echo "-- Gitorius --"
 git push Gitorius master
 
