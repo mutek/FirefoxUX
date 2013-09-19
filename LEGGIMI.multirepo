@@ -24,6 +24,26 @@ Per spingere il deposito locale presso multipli depositi remoti (ad esempio gith
         url = https://bitbucket.org/UTENTE_2/NOME_DEPOSITO_2.git
         url = ssh://UTENTE_3@git.code.sf.net/p/NOME_DEPOSITO_3/code
 
+versione alternativa con controllo specifico per ogni repo:
+
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+[remote "GitHub"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
+        url = https://github.com/UTENTE_1/NOME_DEPOSITO_1.git
+[remote "Bitbucket"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
+        url = https://bitbucket.org/UTENTE_2/NOME_DEPOSITO_2.git
+[remote "Sourceforge"]
+        fetch = +refs/heads/*:refs/remotes/origin/*
+        url = ssh://UTENTE_3@git.code.sf.net/p/NOME_DEPOSITO_3/code
+        
         
 6) esegui i seguenti comandi:
 
@@ -31,7 +51,16 @@ git config --global user.name "UTENTE_X"
 git config --global user.email EMAIL_Z
 git add .
 git commit -a -m "COMMENTO"
+
+PER LA PRIMA VERSIONE:
+
 git push all master
+
+PER LA SECONDA VERSIONE:
+
+git push GitHub master
+git push Bitbucket master
+git push Sourceforge master
 
 a questo punto in sequenza verra richiesto il login e la password di ogni account
 
@@ -41,4 +70,4 @@ questo aggiungera i cambiamenti al repo locale e spingere il repo locale verso i
 Il procedimento è testato e rocksolid
 Se si svolgono modifiche parziali è fondamentale mantenere i repo in sync e di volta in volta bisogna risolvere a seconda di che direzione si è intrapresi.
 
-Un metodo pratico è sempre quello di eseguire un pull di sincronizzazione prima di svolgere qualsiasi modifica
+Un metodo pratico è sempre quello di eseguire un pull di sincronizzazione prima di svolgere qualsiasi modifica locale.
