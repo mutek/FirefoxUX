@@ -1,0 +1,16 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+#[remote "origin"]
+#	fetch = +refs/heads/*:refs/remotes/origin/*
+#	url = https://github.com/mutek/FirefoxUX.git
+[branch "master"]
+	remote = origin
+	#remote = all
+	merge = refs/heads/master
+[remote "all"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = https://github.com/mutek/FirefoxUX.git
+	url = https://bitbucket.org/infodomestic/firefoxux.git
