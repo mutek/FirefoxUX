@@ -66,6 +66,12 @@ a questo punto in sequenza verra richiesto il login e la password di ogni accoun
 
 ---
 
+Attenzione con Gitorius è necessario fornire nel proprio account della chiave SSH pubblica presente tipicamente in .ssh/id_rsa.pub o dove diversamente specificato in modo esplicito a quel punto il login avviene fornendo la password di sblocco della propria chiave privata
+E' il metodo piu rognoso per la portabilita ma piu sicuro degli altri basati su login/password ma piu portabili
+Comunque in ogni shell dove si clona si puo generare una chiave pubblica da esportare nell'accoutn di Gitorius quindi alla fine il problema è minimizzato
+
+---
+
 questo aggiungera i cambiamenti al repo locale e spingere il repo locale verso i depositi remoti
 Il procedimento è testato e rocksolid
 Se si svolgono modifiche parziali è fondamentale mantenere i repo in sync e di volta in volta bisogna risolvere a seconda di che direzione si è intrapresi.

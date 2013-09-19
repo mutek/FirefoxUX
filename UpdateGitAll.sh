@@ -56,6 +56,15 @@ git push Gitorius master
 
 echo ""
 
+git config --global user.name "mutek.android"
+git config --global user.email "mutek.android@gmail.com"
+echo "-- Gitorius --"
+echo "richiede la password momentanea generata in:"
+echo "https://code.google.com/hosting/settings"
+git push GoogleCode master
+
+echo ""
+
 
 echo "done! :)"
 
