@@ -1,8 +1,10 @@
+RELEASE=26.0a1
+
 # ia32
-wget ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-26.0a1.en-US.linux-i686.tar.bz2 &
-wget http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-26.0a1.en-US.linux-i686.checksums 
+wget ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-$RELEASE.en-US.linux-i686.tar.bz2 &
+wget http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-$RELEASE.en-US.linux-i686.checksums 
 
 # amd64
-wget ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-26.0a1.en-US.linux-x86_64.tar.bz2 &
-wget http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-26.0a1.en-US.linux-x86_64.checksums
+wget ftp://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-$RELEASE.en-US.linux-x86_64.tar.bz2 &
+wget http://ftp.mozilla.org/pub/mozilla.org/firefox/nightly/latest-ux/firefox-$RELEASE.en-US.linux-x86_64.checksums
 

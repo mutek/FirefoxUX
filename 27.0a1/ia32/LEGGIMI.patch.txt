@@ -1,0 +1,7 @@
+usato:
+
+diff -u -10 vecchio nuovo > file.patch
+
+-u uniform
+-10 usa 10 linee di testo intorno al diff line (human readable)
+-0 compatta tutto

@@ -1,0 +1,91 @@
+--- /root/andromeda10.6.0.9	2013-09-23 13:16:52.000000000 +0000
++++ /root/andromeda10.6.0.9.1	2013-10-02 14:15:29.000000000 +0000
+@@ -28,22 +28,24 @@
+ # Un filesystem montato è disponibile nel file manager quindi è necessario far tornare i conti alle viste per le API che controllano mtab dove risulta l'ISO montata e viene vista come CDROM.
+ #
+ # Il mount da parte dell'utente AppName avviene in startApp dopo che l'installer ha abilitato l'utente in sudoers (require sudo)
+ # con la specifica riga:
+ #
+ # $AppName ALL=NOPASSWD: $(which mount) -t iso9660 -o loop $BaseDir/$AppName/$AppApp/$App $BaseDir/$AppName/$AppApp 2> /dev/null
+ # $AppName ALL=NOPASSWD: $(which umount) -d -f -l $BaseDir/$AppName/$AppApp 2> /dev/null
+ # espandendo in solido prima di scrivere il file sudoers
+ # attenzione $(which COMMAND) deve essere eseguito da root in quanto puo essere riscritto nelle PATH e redirezionato ad un trojan
+ 
+-
+-RELEASE="10.6.0.9"
++# FIX FIX FIX
++# fix remove dbus-launch
++# deve essere integrato nel ramo 10.6.1
++RELEASE="10.6.0.9.1"
+ ANNO="2013"
+ printf "\n"
+ echo ")A( - Andromeda ("$RELEASE")"
+ echo ""
+ echo "Luca Cappelletti (c) 2010-$ANNO"
+ echo "licensed under the terms of GNU/GPL"
+ echo ""
+ ###############################################################
+ #                  B O O T S T R A P                          #
+ #     verifica della presenza dei tool di dipendenza          #
+@@ -528,21 +530,21 @@
+ 
+ else
+ 
+         arguments="\$@"
+         
+ fi
+ 
+ export PATH=$ApplicationFolder:$ApplicationFolder/bin:$ApplicationFolder/.local/bin:$ApplicationFolder/$AppApp:$ApplicationFolder/$AppApp/bin:\$PATH
+ export LD_LIBRARY_PATH=$ApplicationFolder:$ApplicationFolder/lib:$ApplicationFolder/.local/lib:$ApplicationFolder/$AppApp:$ApplicationFolder/$AppApp/lib:\$LD_LIBRARY_PATH
+ 
+-dbus-launch --exit-with-session $Bin \$arguments
++$Bin \$arguments
+ 
+ exit 0
+ STARTAPP
+ #------------------------------------------------------------
+ 
+ 
+     transaction_command="unlink $ApplicationFolder/$AppApp/startApp"
+     transaction_add
+  
+     if [ ! -s $ApplicationFolder/$AppApp/startApp ]
+@@ -1035,32 +1037,36 @@
+         
+ 
+         if [ ! $user_passwd_name  ]
+         then
+ 
+ 	        echo "$TransactionID: Errore: $AppName non installata, esco"
+ 	        exit 1
+ 
+         else
+         
++        PIN="$(od -vAn -N2 -tu2 < /dev/urandom | cut -d" " -f 2)"
++        [ -z $PIN ] && PIN="1234"
++        
+                         echo "ATTENZIONE: sto per eliminare definitivamente tutto il contenuto della cartella "$user_home" !!"
+                         echo "questo implica ELIMINARE TUTTI i DATI PERSONALI legati a "$user_home
+                         echo "Continuare?"
+                         echo "Digitare esplicitamente la lettera Y in maiuscolo e premere invio per confermare"
+                         echo ""
++                        echo "PIN: "$PIN
+                         read n
+                         RISPOSTA=$n
+                         
+-                        if [ "$RISPOSTA" != "Y" ]
++                        if [ "$RISPOSTA" != "$PIN" ]
+                         then        
+                         
+-                                echo ":)"
++                                echo "Il PIN non corrisponde esco.. :)"
+                                 exit 0
+                                 
+                         else
+                         
+                                 echo "$TransactionID: hai selezionato "$RISPOSTA" procedo come richiesto :("
+                                 sleep 1
+                 	        echo "$TransactionID: App: $AppName in $user_home rimuovo tutto..."
+                 	        remove_Processes
+                             wait
+                 	        remove_Volatile_Cache
