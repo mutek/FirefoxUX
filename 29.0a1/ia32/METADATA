@@ -1,0 +1,10 @@
+APP_NAME=FirefoxUX
+APP_RELEASE=29.0a1
+APP_KERNEL=Linux
+APP_OS=Debian7
+APP_PLATFORM=ia32
+
+APP_BIN=startApp
+
+APP_ROOT=ioFirefoxUX29.0a1-Debian7/Linux-ia32
+

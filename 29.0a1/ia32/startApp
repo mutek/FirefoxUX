@@ -1,0 +1,77 @@
+#!/usr/bin/env sh
+# )A( - Andromeda
+#
+# startApp  wrapper
+#
+# (c) 2010-2014 Luca Cappelletti <luca.cappelletti@gmail.com>
+#
+# copyleft GNU/GPL all rights reserved
+#
+# do not forget now you have .cache/Volatile full private temp folder service
+# made by startApp
+
+######
+#
+# UX ha una cache verbosa in .cache/mozilla
+#
+# migrare tutto in Volatile
+
+options="$@"
+
+APP_NAME=FirefoxUX
+APP_RELEASE=29.0a1
+APP_KERNEL=Linux
+APP_OS=Debian7
+APP_PLATFORM=ia32
+
+APP_BIN=firefox
+
+APP_ROOT=io$APP_NAME$APP_RELEASE-$APP_OS
+SANDBOX_HOME=$APP_NAME
+
+export LD_LIBRARY_PATH=/home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/support:/home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/lib:$LD_LIBRARY_PATH
+export PATH=/home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/bin:$PATH
+
+
+cd $HOME
+
+#### cache .mozilla in caso non è hard coded per esplicita volonta dell'utilizzatore
+#### implica che almeno una volta è stato fissata la cartella .mozilla
+#### e quindi la scelta viene rispettata
+#### diversamente .mozilla vive nella memoria volatile
+if [ -h $HOME/.mozilla ] && [ -e $HOME/.mozilla ]
+then
+:
+else
+
+        rm -rf --preserve-root $HOME/.mozilla
+        rm -rf --preserve-root $HOME/.cache/Volatile/.mozilla
+        mkdir -p $HOME/.cache/Volatile/.mozilla
+        ln -s $HOME/.cache/Volatile/.mozilla $HOME/.mozilla
+
+fi
+
+## prende in considerazione la nuova .cache/mozilla
+# se esiste gia un link o una cartella allora non tocca nulla altrimenti crea un link
+# ha come effetto che un riavvio non resetta un link gia costruito ed una manipolazine manuale creando un cartella ad hoc non viene distrutta
+if [ -h $HOME/.cache/mozilla ] && [ -e $HOME/.cache/mozilla ]
+then
+:
+else
+
+        rm -rf --preserve-root $HOME/.cache/mozilla
+        mkdir -p $HOME/.cache/Volatile/mozilla
+        ln -s $HOME/.cache/Volatile/mozilla $HOME/.cache/mozilla
+
+fi
+
+
+cd $HOME
+
+# background + detach
+# do we need really dbus-launch now?
+#( /home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/bin/$APP_BIN $options & ) &
+
+/home/$APP_NAME/.App/$APP_ROOT/$APP_KERNEL-$APP_PLATFORM/bin/$APP_BIN $options
+
+
